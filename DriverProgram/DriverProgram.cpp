@@ -14,7 +14,7 @@ int main(){
     map<ll, ll> mp, rmp;  
     ll temp = 0;  
 
-    cout << "Enter 1 to input edges manually, or 2 to read from file: ";
+    cout << "Enter 1 to input edges manually, or 2 to read from file: "<<endl;;
     ll inputChoice;
     cin >> inputChoice;
 
@@ -74,7 +74,7 @@ int main(){
     do {
         cout <<endl<< "--- Graph Metrics Menu ---"<<endl;
         cout << "1. Degree Distribution"<<endl;
-        cout << "2. Diameter"<<endl;
+        cout << "2. Density"<<endl;
         cout << "3. LCC (Local Clustering Coefficient)"<<endl;
         cout << "4. GCC (Global Clustering Coefficient)"<<endl;
         cout << "5. Connected Components"<<endl;
@@ -86,28 +86,46 @@ int main(){
         cout << "11. PageRank"<<endl;
         cout << "12. Reciprocity"<<endl;
         cout << "13. Display Network"<<endl;
+        cout << "14. Modularity"<<endl;
+        cout << "15. Purity"<<endl;
+        cout << "16. Omega Index"<<endl;
+        cout << "17. Permanence"<<endl;
+        cout << "18. Clique Percolation"<<endl;
+        cout << "19. Path Similarity"<<endl;    
+        cout << "20. Cosine Similarity"<<endl;    
         cout << "Otherwise. Exit"<<endl;
-        cout << "Enter your choice: --> ";
+        cout << "Enter your choice: --> "<<endl;;
         cin >> choice;
-       
+        
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+ 
         switch(choice) {
             case 1: g.degreeDistribution(); break;
-            case 2: g.diameter(); break;
+            case 2: g.calculateDensity(); break;
             case 3: g.localClusteringCoefficient(); break;
             case 4: g.globalClusteringCoefficient(); break;
             case 5: g.connectedComponents(); break;
             case 6: g.degreeCentrality(); break;
-            case 7: g.eigenVectorCentrality(1, 7); break;
-            case 8: g.katzCentrality(1, 8); break;
+            case 7: g.eigenVectorCentrality(1); break;
+            case 8: g.katzCentrality(1); break;
             case 9: g.closenessCentrality(); break;
             case 10: g.calculateHubAuth(); break;
-            case 11: g.pageRank(1, 11); break;
+            case 11: g.pageRank(1); break;
             case 12: g.calculateReciprocity(); break;
             case 13: g.display(); break;
-            case 14: g.permanence(); break;
+            case 14: g.modularity(); break;
+            case 15: g.purity(); break;
+            case 16: g.omegaIndex(); break;
+            case 17: g.permanence(); break;
+            case 18: g.cliquePercolation(); break;
+            case 19: g.pathSim(); break;
+            case 20: g.cosineSim(); break;
             case 0: cout << "Exiting..."<<endl; break;
             default: cout << "Invalid choice, please try again."<<endl; break;
         }
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+ 
+        cout << "Time taken = " << chrono::duration_cast<chrono::microseconds>(end - begin).count()/1000 << " ms" << endl;
     } while (choice != 0);
 
     return 0;

@@ -44,7 +44,7 @@ public:
             string line;
             while (getline(file, line))
             {
-                content += line + "\n";
+                content += line +endl;
             }
             file.close();
             cout<<content<<endl;
@@ -180,8 +180,8 @@ public:
             ll u=q.front();q.pop();
             for(auto v:this->adjList[u]){
                 if(vis[v]==0){
-                vis[v]=1;
-                q.push(v);
+                    vis[v]=1;
+                    q.push(v);
                 }
             }
         }
@@ -595,7 +595,7 @@ public:
     }
 
     
-    void CosineSim(vvll t){
+    void cosineSim(vvll t){
         vll msim(t.size());
         for (int i = 0; i < t.size(); i++){
             cout<<i<<endl;
@@ -625,15 +625,71 @@ public:
             cout << "Most similiar to " << i << " is " << msim[i] << endl;
         }
     }
-    void modularity(vvll comm){
-        lld q=0;
+    void cosineSim(){
+        vvll t={
+            {2,1,0,0},
+            {50,20,0,0},
+            {2,0,1,0},
+            {2,1,0,0},
+            {0,0,1,1}
+        };
+        cosineSim(t);
+    }
+
+    void pathSim(vvll t){
+        vll msim(t.size());
+        for (int i = 0; i < t.size(); i++){
+            cout<<i<<endl;
+            lld ans = -1e9, mostlikely = i;
+            for (int j = 0; j < t.size(); j++){
+            
+                if (i != j)            {
+                    lld l = 0, r = 0, lr = 0;
+
+                    for (int k = 0; k < t[0].size(); k++){
+                        l += t[i][k] * t[i][k];
+                        r += t[j][k] * t[j][k];
+                        lr += t[i][k] * t[j][k];
+                    }
+                    lld temp = (lr) / (l + r);
+                    cout<<j<<" --> "<<temp<<endl;
+                    if (temp > ans){
+                        ans = temp;
+                        mostlikely = j;
+                    }
+                }
+            }
+            msim[i] = mostlikely;
+        }
+        cout<<"******************"<<endl;
+        for (int i = 0; i < t.size(); i++)    {
+            cout << "Most similiar to " << i << " is " << msim[i] << endl;
+        }
+    }
+    void pathSim(){
+        vvll t={
+            {2,1,0,0},
+            {50,20,0,0},
+            {2,0,1,0},
+            {2,1,0,0},
+            {0,0,1,1}
+        };
+        pathSim(t);
+    }
+
+    void modularity(vvll& comm, vvll& aL, vvll& aM){
+        lld q=0,m=0;
+        for(auto v:aL){
+            m+=v.size();
+        }
+        m/=2;
         for(int i=0;i<comm.size();i++){
             lld mn=0,kn=0;
             auto commn=comm[i];
             for(int j=0;j<commn.size();j++){
-                kn+=adjList[commn[j]].size();
+                kn+=aL[commn[j]].size();
                 for(int k=j+1;k<commn.size();k++){
-                    if(adjMat[commn[j]][commn[k]]){
+                    if(aM[commn[j]][commn[k]]){
                         mn++;
                     }
                 }
@@ -645,6 +701,20 @@ public:
         cout<<"Modularity for given community : "<<q<<endl;
 
     }
+    void modularity(){
+        vvll comm={{0,1,2,3},{4,5,6,7,8,9}};
+        vvll edN={{0,1},{0,3},{1,2},{3,2},{2,4},{4,5},{5,6},{6,7},{7,8},{8,9},{9,4}};
+        vvll aL(10),aM(10,vll(10,0));
+        for(auto x:edN){
+            aL[x[0]].push_back(x[1]);
+            aL[x[1]].push_back(x[0]);
+            aM[x[0]][x[1]]=1;
+            aM[x[1]][x[0]]=1;
+        }
+        modularity(comm,aL,aM);
+        
+    }
+    
     void purity(ll V,vvll detected, vvll groundTruth){
         lld ans=0;
         for(int i=0;i<detected.size();i++){
@@ -675,6 +745,13 @@ public:
         
 
     }
+    void purity(){
+        ll V=7;
+        vvll d={{1,1,1,1,2},{2,2,3,3,3},{2,2,2,2,2,3}};
+        vvll g={{1,1,1,1},{2,2,2,2,2,2,2,2,2},{3,3,3,3}};
+        purity(V,d,g);
+    }
+
     void omegaIndex(ll V,vvll detected, vvll groundTruth){
         lld ans=0;
         vvll l(V,vll(V,0)),r(V,vll(V,0));
@@ -705,7 +782,13 @@ public:
         
 
     }
-    
+    void omegaIndex(){
+        ll V=7;
+        vvll d={{0,1,2,6},{1,3,5},{3,4,5,6}};
+        vvll g={{0,1,2,3,6},{0,1,3,4,5},{4,5,6}};
+        omegaIndex(V,d,g);
+    }
+
     lld internalClusteringCoefficient(ll node, vll &communityNodes,  map<ll, vector<ll>> &graph){
         unordered_set<ll> communitySet(communityNodes.begin(), communityNodes.end());
 
@@ -719,8 +802,8 @@ public:
         ll internalEdges = 0, possibleEdges = 0;
         ll size = internalNeighbors.size();
 
-        for (size_t i = 0; i < internalNeighbors.size(); i++){
-            for (size_t j = i + 1; j < internalNeighbors.size(); j++){
+        for (int i = 0; i < internalNeighbors.size(); i++){
+            for (int j = i + 1; j < internalNeighbors.size(); j++){
                 ll u = internalNeighbors[i];
                 ll v = internalNeighbors[j];
                 if (find(graph.at(u).begin(), graph.at(u).end(), v) != graph.at(u).end()){
@@ -732,7 +815,6 @@ public:
         possibleEdges = size * (size - 1) / 2;
         return possibleEdges > 0 ? static_cast<lld>(internalEdges) / possibleEdges : 0.0;
     }
-
     lld calculatePermanence(ll node,vll &communityNodes,map<ll, vll> &graph,map<ll, ll> &nodeToCommunity){
         ll internalNeighbors = 0;
         map<ll, ll> externalConnections;
@@ -798,6 +880,109 @@ public:
             cout << "Node does not belong to a valid community!" << endl;
         }
     }
+
+    bool isClique(vvll& adj, const vll& nodes) {
+        for (int i = 0; i < nodes.size(); ++i) {
+            for (int j = i + 1; j < nodes.size(); ++j) {
+                if (find(adj[nodes[i]].begin(), adj[nodes[i]].end(), nodes[j]) == adj[nodes[i]].end()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    void findCliques(vvll& adj, vvll& cliques, vll& temp, ll start, ll k) {
+        if (temp.size() == k) {
+            if (isClique(adj, temp)) {
+                cliques.push_back(temp);
+            }
+            return;
+        }
+
+        for (int i = start; i < adj.size(); ++i) {
+            temp.push_back(i);
+            findCliques(adj, cliques, temp, i + 1, k);
+            temp.pop_back();
+        }
+    }
+    vvll buildCommunities(vvll& cliques, ll k) {
+        vvll communities;
+        vector<bool> visited(cliques.size(), false);
+
+        function<void(ll, vll&)> dfs = [&](ll idx, vll& community) {
+            visited[idx] = true;
+            community.insert(community.end(), cliques[idx].begin(), cliques[idx].end());
+
+            for (int i = 0; i < cliques.size(); ++i) {
+                if (!visited[i]) {
+                    ll commonNodes = 0;
+                    for (ll node : cliques[idx]) {
+                        if (find(cliques[i].begin(), cliques[i].end(), node) != cliques[i].end()) {
+                            ++commonNodes;
+                        }
+                    }
+                    if (commonNodes >= k - 1) {
+                        dfs(i, community);
+                    }
+                }
+            }
+        };
+
+        for (int i = 0; i < cliques.size(); ++i) {
+            if (!visited[i]) {
+                vll community;
+                dfs(i, community);
+                sort(community.begin(), community.end());
+                community.erase(unique(community.begin(), community.end()), community.end());
+                communities.push_back(community);
+            }
+        }
+        return communities;
+    }
+    void cliquePercolation() {
+        int n = 7; 
+        vvll adj(n);
+        
+        
+        vector<pair<int, int>> edges = {
+            {0, 1}, {0, 2}, {1, 2},  // Triangle between 0, 1, 2
+            {2, 3}, {3, 4}, {2, 4},  // Triangle between 2, 3, 4
+            {4, 5}, {5, 6}, {4, 6},  // Triangle between 4, 5, 6
+            {1, 5}
+        };
+
+        for (auto& edge : edges) {
+            adj[edge.first].push_back(edge.second);
+            adj[edge.second].push_back(edge.first);
+        }
+
+        int k = 3; 
+        vvll cliques;
+        vll temp;
+
+        findCliques(adj, cliques, temp, 0, k);
+
+        cout << "Found " << k << "-cliques:"<<endl;;
+        for (auto& clique : cliques) {
+            for (int node : clique) {
+                cout << node << " ";
+            }
+            cout <<endl;
+        }
+
+        vvll communities = buildCommunities(cliques, k);
+
+        cout << "\nDetected Communities:\n";
+        for (int i = 0; i < communities.size(); ++i) {
+            cout << "Community " << i + 1 << ": ";
+            for (int node : communities[i]) {
+                cout << node << " ";
+            }
+            cout <<endl;
+        }
+
+    }
+
 
 };
 
