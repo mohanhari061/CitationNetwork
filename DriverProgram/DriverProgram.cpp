@@ -7,7 +7,7 @@ int main(){
     ios_base::sync_with_stdio(false); 
     cin.tie(NULL);
 
-    cout << "Enter number of nodes, edges, and if it's directed (0 for undirected, 1 for directed):" << endl;
+    cout << "Enter number of nodes, edges, and if it's directed (0 for undirected, 1 for directed),Enter 1 to input edges manually, or 2 to read from file: " << endl;
     ll n, m, directed, choice = -1; 
     cin >> n >> m >> directed;
     vvll edges(m); 
@@ -37,7 +37,7 @@ int main(){
             edges[i] = {mp[u], mp[v]};
         }
     } else if(inputChoice == 2) {
-        string filename="H:/MCA/3rd Sem/3rdSem/SNA/Graph/cpp/Dataset/Sample/1000 nodes/edges.txt";
+        string filename="H:/MCA/3rd Sem/3rdSem/SNA/CitationNetwork/Dataset/Sample/1000nodes/edges.txt";
         
 
         ifstream infile(filename);
