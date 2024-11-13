@@ -44,7 +44,7 @@ public:
             string line;
             while (getline(file, line))
             {
-                content += line +endl;
+                content += line +"\n";
             }
             file.close();
             cout<<content<<endl;
@@ -907,10 +907,10 @@ public:
     }
     vvll buildCommunities(vvll& cliques, ll k) {
         vvll communities;
-        vector<bool> visited(cliques.size(), false);
+        vll visited(cliques.size(), 0);
 
         function<void(ll, vll&)> dfs = [&](ll idx, vll& community) {
-            visited[idx] = true;
+            visited[idx] = 1;
             community.insert(community.end(), cliques[idx].begin(), cliques[idx].end());
 
             for (int i = 0; i < cliques.size(); ++i) {
@@ -940,11 +940,11 @@ public:
         return communities;
     }
     void cliquePercolation() {
-        int n = 7; 
+        ll n = 7; 
         vvll adj(n);
         
         
-        vector<pair<int, int>> edges = {
+        vpll edges = {
             {0, 1}, {0, 2}, {1, 2},  // Triangle between 0, 1, 2
             {2, 3}, {3, 4}, {2, 4},  // Triangle between 2, 3, 4
             {4, 5}, {5, 6}, {4, 6},  // Triangle between 4, 5, 6
@@ -956,7 +956,7 @@ public:
             adj[edge.second].push_back(edge.first);
         }
 
-        int k = 3; 
+        ll k = 3; 
         vvll cliques;
         vll temp;
 
@@ -964,7 +964,7 @@ public:
 
         cout << "Found " << k << "-cliques:"<<endl;;
         for (auto& clique : cliques) {
-            for (int node : clique) {
+            for (ll node : clique) {
                 cout << node << " ";
             }
             cout <<endl;
@@ -975,7 +975,7 @@ public:
         cout << "\nDetected Communities:\n";
         for (int i = 0; i < communities.size(); ++i) {
             cout << "Community " << i + 1 << ": ";
-            for (int node : communities[i]) {
+            for (ll node : communities[i]) {
                 cout << node << " ";
             }
             cout <<endl;
