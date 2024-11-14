@@ -14,7 +14,9 @@ public:
     vvll adjMat, d;
     matrixOperation matOps;  
 
-    graph() {}
+    graph(){
+
+    }
 
     graph(ll n, vvll edges, map<ll,ll> rmp, bool directed = false) {
         this->n = n;
@@ -36,6 +38,7 @@ public:
 
         // cout << "constructor called";
     }
+    
     void publication(ll paper){
         string filePath = "H:/MCA/3rd Sem/3rdSem/SNA/CitationNetwork/Dataset/Sample/1000nodes/docdata/" + to_string(paper) + ".abs";
         ifstream file(filePath);
@@ -53,6 +56,7 @@ public:
             cout << "Not Found"<<endl;;
         }
     }
+    
     void display(){
         cout<<"Adjacency List"<<endl;
         for(int i=0;i<n;i++){
@@ -351,6 +355,7 @@ public:
         return res;
 
     }
+    
     void katzCentrality(ll show=0,ll rank=5){ 
         vvvlld A(10,vvlld(n,vlld(n,0)));
         vlld ans(n);
@@ -982,7 +987,6 @@ public:
         }
 
     }
-
 
 };
 
