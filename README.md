@@ -95,78 +95,6 @@ Additionally, the dataset includes text documents associated with each node. We 
     Measures the permanence of nodes in communities, determining the stability of a community's structure over time.
 
 ---
-### Outputs
-
-##### 1. Degree Distribution
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 2. Local Clustering Coefficient
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 3. Global Clustering Coefficient
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 4. BFS
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 5. Connected Components
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 6. Degree Centrality
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 7. Closeness Centrality
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 8. Eigen Vector Centrality
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 9. Diameter
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 10. Bfs Dis
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 11. Katz Centrality
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 12. PageRank
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 13. Calculate Density
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 14. Calculate Hub Auth
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 15. Calculate Reciprocity
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 16. Link Prediction  Clustering Coefficient
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 17. SimRank
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 18. Cosine Similarity
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 19. Modularity
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 20. Purity
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 21. Omega Index
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 22. Internal Clustering Coefficient
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
-##### 23. Calculate Permanence
-<img src="images/code/dummyoutput.png" alt="Code Output" width="500"> 
-
----
 
 
 ### Comparison with Gephi 
@@ -174,36 +102,44 @@ Additionally, the dataset includes text documents associated with each node. We 
 <img src="images/gephi/graph.png" alt="Graph Render" width="500" /> 
 
 **Fruchterman-Reingold**
+# Graph Analysis Outputs using Gephi
 
-#### 1. Average Clustering Cofficient
-| Output from Code | Gephi Output |
-|-|-|
-| <img src="images/code/dummyoutput.png" alt="Code Output" width="400" /> | <img src="images/gephi/avgclusteringcoeff.png" alt="Gephi Output" width="400" /> |
+This document presents various graph analysis outputs generated using Gephi, including average clustering coefficient, connected components, density, eigenvector centrality, modularity, and PageRank.
 
-#### 2. Connected Component
-| Output from Code | Gephi Output |
-|-|-|
-| <img src="images/code/dummyoutput.png" alt="Code Output" width="400" /> | <img src="images/gephi/connectedComponent.png" alt="Gephi Output" width="400" /> |
+---
 
-#### 3. Density
-| Output from Code | Gephi Output |
-|-|-|
-| <img src="images/code/dummyoutput.png" alt="Code Output" width="400" /> | <img src="images/gephi/density.png" alt="Gephi Output" width="400" /> |
+### 1. Average Clustering Coefficient
+| Gephi Output |
+|--------------|
+| <img src="images/gephi/avgclusteringcoeff.png" alt="Gephi Output" width="400" /> |
 
-#### 4. EigenVector
-| Output from Code | Gephi Output |
-|-|-|
-| <img src="images/code/dummyoutput.png" alt="Code Output" width="400" /> | <img src="images/gephi/eigenvector.png" alt="Gephi Output" width="400" /> |
+### 2. Connected Component
+| Gephi Output |
+|--------------|
+| <img src="images/gephi/connectedComponent.png" alt="Gephi Output" width="400" /> |
 
-#### 5. Modularity
-| Output from Code | Gephi Output |
-|-|-|
-| <img src="images/code/dummyoutput.png" alt="Code Output" width="400" /> | <img src="images/gephi/modularity.png" alt="Gephi Output" width="400" /> |
+### 3. Density
+| Gephi Output |
+|--------------|
+| <img src="images/gephi/density.png" alt="Gephi Output" width="400" /> |
 
-#### 6. PageRank
-| Output from Code | Gephi Output |
-|-|-|
-| <img src="images/code/dummyoutput.png" alt="Code Output" width="400" /> | <img src="images/gephi/pagerank.png" alt="Gephi Output" width="400" /> |
+### 4. Eigenvector Centrality
+| Gephi Output |
+|--------------|
+| <img src="images/gephi/eigenvector.png" alt="Gephi Output" width="400" /> |
+
+### 5. Modularity
+| Gephi Output |
+|--------------|
+| <img src="images/gephi/modularity.png" alt="Gephi Output" width="400" /> |
+
+### 6. PageRank
+| Gephi Output |
+|--------------|
+| <img src="images/gephi/pagerank.png" alt="Gephi Output" width="400" /> |
+
+---
+
 
 ---
 

@@ -988,5 +988,58 @@ public:
 
     }
 
+    bool isKplex(set<ll>& subgraph,ll k) {
+        for (ll node : subgraph) {
+            ll neighbors = 0;
+            for (ll neighbor : adjList[node]) {
+                if (subgraph.find(neighbor) != subgraph.end()) {
+                    neighbors++;
+                }
+            }
+            if ((subgraph.size() - 1 - neighbors) > k) {
+                return false;
+            }
+        }
+        return true;
+    }
+    void findKplexCommunities(ll k=4) {
+        vll nodes;
+        for(int i=0;i<n;i++){
+           nodes.push_back(i);
+        }
+
+        set<vll> communities;
+
+        for (int size = k + 1; size <= nodes.size(); ++size) {
+            vll subset(size);
+            vector<bool> mask(nodes.size());
+            fill(mask.begin(), mask.begin() + size, true);
+
+            do {
+                ll index = 0;
+                for (int i = 0; i < nodes.size(); ++i) {
+                    if (mask[i]) {
+                        subset[index++] = nodes[i];
+                    }
+                }
+
+                set<ll> subsetSet(subset.begin(), subset.end());
+                if (isKplex(subsetSet, k)) {
+                    communities.insert(subset);
+                }
+
+            } while (prev_permutation(mask.begin(), mask.end()));
+        }
+        cout << "Detected k-plex communities:" << endl;
+        ll temp=1;
+        for (const auto& community : communities) {
+            cout<<temp<<"th Community *************************************************"<<endl;
+            for (ll node : community) {
+                cout << node << " ";
+            }
+            cout << endl;
+        }
+    }
+
 };
 

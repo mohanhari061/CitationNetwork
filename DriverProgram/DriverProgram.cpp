@@ -93,6 +93,7 @@ int main(){
         cout << "18. Clique Percolation"<<endl;
         cout << "19. Path Similarity"<<endl;    
         cout << "20. Cosine Similarity"<<endl;    
+        cout << "21. K-Plex community Detection"<<endl;    
         cout << "Otherwise. Exit"<<endl;
         cout << "Enter your choice: --> "<<endl;;
         cin >> choice;
@@ -120,12 +121,13 @@ int main(){
             case 18: g.cliquePercolation(); break;
             case 19: g.pathSim(); break;
             case 20: g.cosineSim(); break;
+            case 21: g.findKplexCommunities(998); break;
             case 0: cout << "Exiting..."<<endl; break;
             default: cout << "Invalid choice, please try again."<<endl; break;
         }
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
  
-        cout << "Time taken = " << chrono::duration_cast<chrono::microseconds>(end - begin).count()/1000 << " ms" << endl;
+        cout << "Time taken = " << chrono::duration_cast<chrono::microseconds>(end - begin).count() << " microseconds" << endl;
     } while (choice != 0);
 
     return 0;
